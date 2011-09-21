@@ -4,6 +4,11 @@ body {
 
 .container {
 	background-color: white;
+	-moz-box-shadow: 0px 4px 12px #ccc; /* FF3.5+ */
+	-webkit-box-shadow: 0px 4px 12px #ccc; /* Saf3.0+, Chrome */
+	box-shadow: 0px 4px 12px #ccc; /* Opera 10.5, IE 9.0 */
+	filter:  progid:DXImageTransform.Microsoft.dropshadow(OffX=12px, OffY=12px, Color='#ccc'); /* IE6,IE7 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.dropshadow(OffX=12px, OffY=12px, Color='#ccc')"; /* IE8 */
 }
 
 #header {
