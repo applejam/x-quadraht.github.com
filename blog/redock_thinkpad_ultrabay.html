@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="" />
+
+	<title>Redock Thinkpad UltraBay</title>
+	
+	<link rel="stylesheet" href="/media/css/blueprint/screen.css" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="/media/css/blueprint/print.css" type="text/css" media="print" />
+	<!--[if lt IE 8]>
+			<link rel="stylesheet" href="/media/css/blueprint/ie.css" type="text/css" media="screen, projection" />
+	<![endif]-->
+
+	<link rel="stylesheet" href="/media/css/base.css" type="text/css" />
+	<link rel="stylesheet" href="/media/css/code.css" type="text/css" />
+</head>
+<body>
+	<div class="container">
+		<div id="header" class="span-24">
+			<h1>xqms <span id="header-name">Max Schwarz</span></h1>
+		</div>
+		<div id="nav" class="span-24">
+						<nav class=main_nav>
+    <ul>
+                        <li>
+            <a title="Blog"
+                class="button white active blog first"
+                href="/blog">
+                Blog
+            </a>
+        </li>                <li>
+            <a title="About"
+                class="button white about"
+                href="/about.html">
+                About
+            </a>
+        </li>    </ul>
+</nav>
+		</div>
+
+		<div class="span-24">
+		<div id="main">
+		
+<article>
+
+<h3 class="title">
+    <a href="/blog/redock_thinkpad_ultrabay.html">
+        Redock Thinkpad UltraBay
+    </a>
+</h3>
+
+<div class="time small">
+<time datetime="">
+	Posted: Fri, 06 May 2011
+</time>
+</div>
+
+<p>The UltraBay in my Lenovo Thinkpad T400 has a very nice <span class="caps">ACPI</span> interface to turn it&nbsp;off:</p>
+<script src="https://gist.github.com/1230632.js?file=undock.sh"></script>
+
+<p>But how to turn it on again? (Assuming, of course, that I am too lazy to
+simulate a drive change by toggling the eject&nbsp;pin).</p>
+<p>A look at the linux kernel source gives:&nbsp;(drivers/acpi/dock.c):</p>
+<script src="https://gist.github.com/1230632.js?file=dock.c"></script>
+
+<p>By looking at the dmesg output I gathered that the <span class="caps">ACPI</span> method
+_SB_.<span class="caps">PCI0</span>.<span class="caps">SATA</span>.<span class="caps">PRT1</span>._EJ0 was being called. Let&#8217;s take a look at the <span class="caps">DSDT</span> table
+of my <span class="caps">BIOS</span> to find out what it&nbsp;does:</p>
+<script src="https://gist.github.com/1230632.js?file=dsdt_1"></script>
+
+<p>Seems that the Thinkpad Embedded Controller, which you may know from its
+firmware updates, is involved. Following the call&nbsp;further:</p>
+<script src="https://gist.github.com/1230632.js?file=dsdt_2"></script>
+
+<p>Since Arg0 is 1 in our case (look at the kernel code above), the first execution
+path is&nbsp;taken.</p>
+<p>Through trial-and-error and the help of the
+<a href="" title="https://github.com/mkottman/acpi_call">acpi_call module</a> I was able to narrow
+the power cut-off to the <span class="caps">BDIS</span>()&nbsp;call.</p>
+<script src="https://gist.github.com/1230632.js?file=dsdt_3"></script>
+
+<p>Let&#8217;s try the <span class="caps">BPON</span> method, which is located right next to <span class="caps">BDIS</span>. Bingo!
+My UltraBay <span class="caps">HDD</span> spins up and is properly&nbsp;detected.</p>
+<p>Yes, I could have just switched the <span class="caps">HDD</span> on/off via hdparm, but this method
+removes <strong>all</strong> power from the bay, which sounds nicer.
+Anyway, learned something new about the notebook I carry around all day&nbsp;;-)</p>
+</article>
+
+		</div>
+		</div>
+
+		<div class="span-24" id="footer">
+			Max Schwarz &lt;Max (_a_t_) x-quadraht (dot) de&gt;
+		</div>
+	</div>
+</body>
+</html>
