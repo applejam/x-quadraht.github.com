@@ -150,3 +150,8 @@ article .time {
 	text-align: center;
 	border-top: 1px solid black;
 }
+
+h2 {
+	font-size: 120%;
+	font-weight: bold;
+}

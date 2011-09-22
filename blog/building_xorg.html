@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8" />
+
+	<title>Building X.org from source</title>
+	
+	<link rel="stylesheet" href="/media/css/blueprint/screen.css" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="/media/css/blueprint/print.css" type="text/css" media="print" />
+	<!--[if lt IE 8]>
+			<link rel="stylesheet" href="/media/css/blueprint/ie.css" type="text/css" media="screen, projection" />
+	<![endif]-->
+
+	<link rel="stylesheet" href="/media/css/base.css" type="text/css" />
+	<link rel="stylesheet" href="/media/css/code.css" type="text/css" />
+</head>
+<body>
+	<div class="container">
+		<div id="header" class="span-24">
+			<h1>xqms <span id="header-name">Max Schwarz</span></h1>
+		</div>
+		<div id="nav" class="span-24">
+						<nav class=main_nav>
+    <ul>
+                        <li>
+            <a title="Blog"
+                class="button white active blog first"
+                href="/blog">
+                Blog
+            </a>
+        </li>                <li>
+            <a title="About"
+                class="button white about"
+                href="/about.html">
+                About
+            </a>
+        </li>    </ul>
+</nav>
+		</div>
+
+		<div class="span-24">
+		<div id="main">
+		
+<article>
+
+<h3 class="title">
+    <a href="/blog/building_xorg.html">
+        Building X.org from source
+    </a>
+</h3>
+
+<div class="time small">
+<time datetime="2011-09-22">
+	Posted: Thu, 22 Sep 2011
+</time>
+</div>
+
+<p>I&#8217;ve decided to take on <a href="https://github.com/x-quadraht/pscroll">pscroll</a> development again. Last time (Nov
+2010) I couldn&#8217;t finish my work because of impending graduation from high
+school (which went very well) and <a href="http://www.robocup2011.org">Robocup Junior</a>.</p>
+<p>This time, I will base my patches on <code>X.org</code> master. I used ubuntu&#8217;s versions
+in the past, because I thought it would be easier to&nbsp;develop.</p>
+<p>So let&#8217;s build all necessary modules from master, and install it under a
+prefix in my&nbsp;$<span class="caps">HOME</span>.</p>
+<h2>Part 1: Building <code>X.org</code></h2>
+<p><code>X.org</code> is maintained in multiple (read: many) git repositories. We will use
+<a href="http://developer.gnome.org/jhbuild/">jhbuild</a> to build all the modules we need. The necessary information for
+<code>jhbuild</code> is kept in a <code>X.org</code> module&nbsp;itself:</p>
+<script src="https://gist.github.com/1234361.js?file=setup-jhbuild.sh"></script>
+
+<p>As I&#8217;m not a xorg core developer, I like to have my xorg files in a
+subdirectory instead of the default <code>~/xorg</code> and <code>~/xorg-build</code>. So here is my
+very own <code>jhbuildrc</code>:</p>
+<script src="https://gist.github.com/1234361.js?file=jhbuildrc"></script>
+
+<p>So let&#8217;s build&nbsp;it:</p>
+<script src="https://gist.github.com/1234361.js?file=build.sh"></script>
+
+<p>That one took about an hour for me (with a quick interruption to install
+<code>llvm</code>, required by&nbsp;libGL).</p>
+<h2>Part 2:&nbsp;Configuration</h2>
+<p>Since I want to use my system fonts for my local <code>X</code> installation, we have to
+create a configuration file to tell <code>X.org</code> where they&nbsp;are:</p>
+<script src="https://gist.github.com/1234361.js?file=xorg.conf"></script>
+
+<p>I placed that in <code>checkoutroot/build/etc/X11/xorg.conf</code>. Since we want to
+develop as user we have to set <code>bin/Xorg</code> to be setuid&nbsp;root:</p>
+<script src="https://gist.github.com/1234361.js?file=xorg-root.sh"></script>
+
+<h2>Part 3: Running <code>X.org</code></h2>
+<p>Let&#8217;s start <code>X.org</code> on tty 8, letting us switch back to the &#8216;stable&#8217; server
+through <code>STRG+ALT+F7</code>:</p>
+<script src="https://gist.github.com/1234361.js?file=run-xorg.sh"></script>
+
+<p>I&#8217;ll now take a look at my old <a href="https://github.com/x-quadraht/pscroll">pscroll patches</a>, and update them
+against master. We&#8217;ll see how that goes&nbsp;;-)</p>
+</article>
+
+		</div>
+		</div>
+
+		<div class="span-24" id="footer">
+			Max Schwarz &lt;Max (_a_t_) x-quadraht (dot) de&gt;
+		</div>
+	</div>
+</body>
+</html>
