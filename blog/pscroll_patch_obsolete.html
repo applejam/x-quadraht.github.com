@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8" />
+
+	<title>pscroll patch obsolete</title>
+	
+	<link rel="stylesheet" href="/media/css/blueprint/screen.css" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="/media/css/blueprint/print.css" type="text/css" media="print" />
+	<!--[if lt IE 8]>
+			<link rel="stylesheet" href="/media/css/blueprint/ie.css" type="text/css" media="screen, projection" />
+	<![endif]-->
+
+	<link rel="stylesheet" href="/media/css/base.css" type="text/css" />
+	<link rel="stylesheet" href="/media/css/code.css" type="text/css" />
+</head>
+<body>
+	<div class="container">
+		<div id="header" class="span-24">
+			<h1>xqms <span id="header-name">Max Schwarz</span></h1>
+		</div>
+		<div id="nav" class="span-24">
+						<nav class=main_nav>
+    <ul>
+                        <li>
+            <a title="Blog"
+                class="button white active blog first"
+                href="/blog">
+                Blog
+            </a>
+        </li>                <li>
+            <a title="About"
+                class="button white about"
+                href="/about.html">
+                About
+            </a>
+        </li>    </ul>
+</nav>
+		</div>
+
+		<div class="span-24">
+		<div id="main">
+		
+<article>
+
+<h3 class="title">
+    <a href="/blog/pscroll_patch_obsolete.html">
+        pscroll patch obsolete
+    </a>
+</h3>
+
+<div class="time small">
+<time datetime="2011-09-23">
+	Posted: Fri, 23 Sep 2011
+</time>
+</div>
+
+<p><a href="http://who-t.blogspot.com">Peter Hutterer</a> has just sent a few patches to <code>xorg-devel@lists.x.org</code>
+which make my series of <a href="https://github.com/x-quadraht/pscroll">pscroll</a> patches to xorg&nbsp;obsolete:</p>
+<ul>
+<li>He uses a new valuator class to distinguish &#8220;scrolling valuators&#8221; from
+    normal valuators. The XInput extension 2.1 (only in Peter&#8217;s repositories)
+    contains methods to query scrolling valuators (see his
+    <a href="http://who-t.blogspot.com/2011/09/whats-new-in-xi-21-smooth-scrolling.html">blog post</a>)</li>
+<li>Valuator values are reported in <code>double</code> precision. My patch used integer
+    values (in hardware resolution) and specified the scaling in another
+    integer&nbsp;field.</li>
+<li>The whole no-integration part of my patches was not included, the valuators
+    just accumulate their values. Applications have to track and detect
+    changes themselves. I&#8217;m not sure how to feel about that. But it&#8217;s surely
+    more consistent with the old <code>X.org</code> code.</li>
+</ul>
+<p>The patch series is still missing a few parts, like wheel emulation in evdev and
+synaptics support. I will try to contribute there and develop a Qt4 patch in&nbsp;parallel.</p>
+<p>I will do a follow-up blog post about getting Peter&#8217;s code running on your
+machine with <code>jhbuild</code>.</p>
+</article>
+
+		</div>
+		</div>
+
+		<div class="span-24" id="footer">
+			Max Schwarz &lt;Max (_a_t_) x-quadraht (dot) de&gt;
+		</div>
+	</div>
+</body>
+</html>
