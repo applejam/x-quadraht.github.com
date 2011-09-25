@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8" />
+
+	<title>Getting XI2.1 on your machine</title>
+	
+	<link rel="stylesheet" href="/media/css/blueprint/screen.css" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="/media/css/blueprint/print.css" type="text/css" media="print" />
+	<!--[if lt IE 8]>
+			<link rel="stylesheet" href="/media/css/blueprint/ie.css" type="text/css" media="screen, projection" />
+	<![endif]-->
+
+	<link rel="stylesheet" href="/media/css/base.css" type="text/css" />
+	<link rel="stylesheet" href="/media/css/code.css" type="text/css" />
+</head>
+<body>
+	<div class="container">
+		<div id="header" class="span-24">
+			<h1>xqms <span id="header-name">Max Schwarz</span></h1>
+		</div>
+		<div id="nav" class="span-24">
+						<nav class=main_nav>
+    <ul>
+                        <li>
+            <a title="Blog"
+                class="button white active blog first"
+                href="/blog">
+                Blog
+            </a>
+        </li>                <li>
+            <a title="About"
+                class="button white about"
+                href="/about.html">
+                About
+            </a>
+        </li>    </ul>
+</nav>
+		</div>
+
+		<div class="span-24">
+		<div id="main">
+		
+<article>
+
+<h3 class="title">
+    <a href="/blog/getting_xi21.html">
+        Getting XI2.1 on your machine
+    </a>
+</h3>
+
+<div class="time small">
+<time datetime="2011-09-25">
+	Posted: Sun, 25 Sep 2011
+</time>
+</div>
+
+<p>As I reported in an <a href="/blog/pscroll_patch_obsolete.html">earlier post</a>, <a href="http://who-t.blogspot.com">Peter Hutterer</a> includes
+smooth-scrolling support in his <span class="caps">XI2</span>.1 patchset. I will detail on how to get that
+running on your&nbsp;machine.</p>
+<h2>Part I: Configuring&nbsp;jhbuild</h2>
+<p>My extended <code>jhbuildrc</code> looks like this: (see my <a href="/blog/building_xorg.html">first post</a> about
+<code>pscroll</code> for my intro on <code>jhbuild</code>)</p>
+<script src="https://gist.github.com/1241000.js?file=jhbuildrc"></script>
+
+<p>The <code>branches</code> dict specifies which repositories and branches to use for the&nbsp;build.</p>
+<h2>Part <span class="caps">II</span>: Building the modules&nbsp;again</h2>
+<p>You can either delete the changed modules&#8217; repositories and let <code>jhbuild</code>
+recreate them correctly or configure them manually to use the new remotes
+and&nbsp;branches:</p>
+<script src="https://gist.github.com/1241000.js?file=config_git.sh"></script>
+
+<p>Now start the&nbsp;build:</p>
+<script src="https://gist.github.com/1241000.js?file=build.sh"></script>
+
+<h2>Part <span class="caps">III</span>: Patching errors (may not be&nbsp;needed)</h2>
+<p>As Peter&#8217;s repositories are his private repositories, things may only compile
+on his machine. A compile error encountered by me can be seen&nbsp;below:</p>
+<script src="https://gist.github.com/1241000.js?file=gcc_error.log"></script>
+
+<p>I don&#8217;t know if that can be fixed via a <code>configure</code> switch, I did it via a small
+<a href="https://gist.github.com/d0828f2e99b36ec01340">patch</a>. You can import it via <code>git am</code>.</p>
+</article>
+
+		</div>
+		</div>
+
+		<div class="span-24" id="footer">
+			Max Schwarz &lt;Max (_a_t_) x-quadraht (dot) de&gt;
+		</div>
+	</div>
+</body>
+</html>
