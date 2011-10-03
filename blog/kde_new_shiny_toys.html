@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8" />
+
+	<title>KDE: New shiny toys</title>
+	
+	<link rel="stylesheet" href="/media/css/blueprint/screen.css" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="/media/css/blueprint/print.css" type="text/css" media="print" />
+	<!--[if lt IE 8]>
+			<link rel="stylesheet" href="/media/css/blueprint/ie.css" type="text/css" media="screen, projection" />
+	<![endif]-->
+
+	<link rel="stylesheet" href="/media/css/base.css" type="text/css" />
+	<link rel="stylesheet" href="/media/css/code.css" type="text/css" />
+</head>
+<body>
+	<div class="container">
+		<div id="header" class="span-24">
+			<h1>xqms <span id="header-name">Max Schwarz</span></h1>
+		</div>
+		<div id="nav" class="span-24">
+						<nav class=main_nav>
+    <ul>
+                        <li>
+            <a title="Blog"
+                class="button white active blog first"
+                href="/blog">
+                Blog
+            </a>
+        </li>                <li>
+            <a title="About"
+                class="button white about"
+                href="/about.html">
+                About
+            </a>
+        </li>    </ul>
+</nav>
+		</div>
+
+		<div class="span-24">
+		<div id="main">
+		
+<article>
+
+<h3 class="title">
+    <a href="/blog/kde_new_shiny_toys.html">
+        KDE: New shiny toys
+    </a>
+</h3>
+
+<div class="time small">
+<time datetime="2011-10-03">
+	Posted: Mon, 03 Oct 2011
+</time>
+</div>
+
+<p><aside class="images">
+<div class="img_box">
+<img alt="Bangarang" src="/media/img/bangarang.png" style="float: left" />
+<img alt="PublicTransport" src="/media/img/publictransport.png" />
+</div>
+</aside></p>
+<p>Two new toys for you to try out: <a href="https://bangarangkde.wordpress.com/">Bangarang</a> and <a href="http://kde-look.org/content/show.php/PublicTransport?action=content&amp;content=106175">PublicTransport</a>.</p>
+<h2>Bangarang</h2>
+<p><a href="https://bangarangkde.wordpress.com/">Bangarang</a> is a relatively new media player based on key <span class="caps">KDE</span> technologies:
+<a href="http://phonon.kde.org/">Phonon</a> for multimedia output and <a href="http://nepomuk.kde.org/">Nepomuk</a> for semantic&nbsp;storage.</p>
+<p>The player feels very snappy, and is like a breath of fresh air after
+<a href="http://amarok.kde.org/">Amarok 2.x</a>. Don&#8217;t get me wrong, I love Amarok&#8217;s extended abilities. But
+sometimes you just want to listen to a few songs, and Bangarang seems perfect
+for&nbsp;that.</p>
+<h2>PublicTransport</h2>
+<p>is a very nice plasmoid. In fact, it&#8217;s the only one I can see myself using along
+with my old <a href="http://kde-apps.org/content/show.php/SmoothWebView?content=129068&amp;foo=f7d00a42a0db454a77a7c757e1b28333">SmoothWebView</a> plasmoid. It&#8217;s purpose: Showing you departing
+trains/busses/etc at a defined&nbsp;stop.</p>
+<p>Its filtering system is very&nbsp;powerful:</p>
+<ul>
+<li>You can filter departures easily via their route (called &#8220;color&nbsp;filter&#8221;)</li>
+<li>You can specify own filters that filter via transport type, time,&nbsp;etc.</li>
+</ul>
+<p>Building it is a bit tricky, since it consists of multiple modules built with
+CMake, but no top CMakeLists.txt (why?). Here&#8217;s my own&nbsp;one:</p>
+<script src="https://gist.github.com/1258931.js?file=CMakeLists.txt"></script>
+
+<p>I disabled the runner component and <code>timetablemate</code> (a small <span class="caps">IDE</span>) because
+they didn&#8217;t compile immediately on my system (dependencies?) and I didn&#8217;t need
+them.
+Remember to either set <code>CMAKE_PREFIX</code> to <code>/usr</code> or point <code>KDEDIRS</code> to your&nbsp;prefix!</p>
+<h2>More&nbsp;awesomeness</h2>
+<p>Take a look at <a href="http://dot.kde.org/">dot.kde.org</a> from time to time. They report on <span class="caps">KDE</span> commits in a
+weekly digest, and take up many other cool reports from <span class="caps">KDE</span>&nbsp;blogs.</p>
+</article>
+
+		</div>
+		</div>
+
+		<div class="span-24" id="footer">
+			Max Schwarz &lt;Max (_a_t_) x-quadraht (dot) de&gt;
+		</div>
+	</div>
+</body>
+</html>
